@@ -1,0 +1,37 @@
+version: "3"
+services:
+
+  gometrics:
+    build: ./go-metrics
+    ports:
+      - 5000:5000
+
+  pushgateway:
+    image: prom/pushgateway:v1.4.0
+    ports:
+      - 9091:9091
+
+  prometheus:
+    image: prom/prometheus:v2.22.1
+    command: --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alerts/:/etc/prometheus/rules.d/
+
+  grafana:
+    image: grafana/grafana:6.5.0
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+
+  alertmanager:
+    image: prom/alertmanager:v0.21.0
+    command: --config.file=/etc/alertmanager/alertmanager.yml
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
