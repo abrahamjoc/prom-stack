@@ -69,3 +69,7 @@ To push a metric in Prom-Stack, you can do something like this:
 `echo "mymetric 99" | curl --data-binary @- http://localhost:9091/metrics/job/my-push-job`
 
 You can confirm this has worked by navigating to the [Push Gateway](http://localhost:9091) UI or the [Prometheus](http://localhost:9090) expression browser.
+
+## Use Go metrics with random endpoint
+
+Go to [http://localhost:5000/random](http://localhost:5000/random)
