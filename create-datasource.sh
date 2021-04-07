@@ -8,3 +8,4 @@ do
 done
 
 curl -s --user admin:password 'http://localhost:3000/api/dashboards/db' -X POST -H 'Content-Type:application/json' --data-binary @./grafana/go-metrics-dashboard.json 2>&1 > /dev/null
+curl -s --user admin:password 'http://localhost:3000/api/dashboards/db' -X POST -H 'Content-Type:application/json' --data-binary @./grafana/pushgateway-dashboard.json 2>&1 > /dev/null
