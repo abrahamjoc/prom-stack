@@ -6,3 +6,5 @@ do
     echo "Waiting for Grafana to be ready..."
     sleep 1
 done
+
+curl -s --user admin:password 'http://localhost:3000/api/dashboards/db' -X POST -H 'Content-Type:application/json' --data-binary @./grafana/go-metrics-dashboard.json 2>&1 > /dev/null
